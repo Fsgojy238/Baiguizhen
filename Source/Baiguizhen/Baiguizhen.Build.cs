@@ -20,7 +20,8 @@ public class Baiguizhen : ModuleRules
 			"EnhancedInput",
 			"GameplayAbilities",
 			"GameplayTags" ,
-			"GameplayTasks"
+			"GameplayTasks","ActionSkillAssetRuntime","ActionCameraSystemAsset"
+			
 		});
 
 		// Uncomment if you are using Slate UI
