@@ -12,8 +12,8 @@ USkillClipAbility_HoldSkill::USkillClipAbility_HoldSkill()
 
 UAnimMontage* USkillClipAbility_HoldSkill::HoldMontagePlayedRule_Implementation()
 {
-	//TODO::Hold规则的内部实现
-	
+
+
 	return AnimPlayedRules.PlayedMontages[0];
 }
 

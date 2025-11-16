@@ -21,7 +21,7 @@ AActionPlayerCharacter::AActionPlayerCharacter()
 	PrimaryActorTick.bCanEverTick = true;
 	ActionAbilitySystemComponent=CreateDefaultSubobject<UActionAbilitySystemComponent>("ActionAbilitySystemComponent");
 	AttackCollisionComponent=CreateDefaultSubobject<UAttackCollisionComponent>("AttackCollisionCompoent");
-	//TODO::临时使用后面对摄像机实行自定义方法。
+	
 }
 
 UAbilitySystemComponent* AActionPlayerCharacter::GetAbilitySystemComponent() const
