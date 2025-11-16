@@ -24,13 +24,13 @@ struct FCollisionShapeInfo
 	 * 
 	 */
 	UPROPERTY(EditAnywhere,BlueprintReadOnly)
-	ECollisionShapeInfo CollisionShape;
+	ECollisionShapeInfo CollisionShape=ECollisionShapeInfo::Box;
 	UPROPERTY(EditAnywhere,BlueprintReadOnly,meta=(EditCondition="CollisionShape== ECollisionShapeInfo::Box",EditConditionHides))
-	FVector3f BoxCollisionInfo;
+	FVector3f BoxCollisionInfo=FVector3f::ZeroVector;
 	UPROPERTY(EditAnywhere,BlueprintReadOnly,meta=(EditCondition="CollisionShape== ECollisionShapeInfo::Sphere",EditConditionHides))
-	float SphereRadiusInfo;
+	float SphereRadiusInfo=0.0f;
 	UPROPERTY(EditAnywhere,BlueprintReadOnly,meta=(EditCondition="CollisionShape== ECollisionShapeInfo::Capsule",EditConditionHides))
-	FVector2D CapsuleInfo;
+	FVector2D CapsuleInfo=FVector2D::ZeroVector;
 	void SetCollisionShape();
 	FCollisionShape GetCollisionShape();
 private:
@@ -51,9 +51,9 @@ struct FGlobalCollisionPoint
 {
 	GENERATED_BODY()
 	UPROPERTY(EditAnywhere,BlueprintReadOnly)
-	FVector StartPoint;
+	FVector StartPoint=FVector::ZeroVector;
 	UPROPERTY(EditAnywhere,BlueprintReadOnly)
-	FVector EndPoint;
+	FVector EndPoint=FVector::ZeroVector;
 };
 USTRUCT(BlueprintType)
 struct FGlobalCollisionTargetPoint

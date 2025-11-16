@@ -13,7 +13,7 @@ struct FAttackedResult
 	UPROPERTY(BlueprintReadOnly)
 	FHitResult HitResult;
 	UPROPERTY(BlueprintReadWrite)
-	AActor * Attacker;
+	AActor * Attacker=nullptr;
 	UPROPERTY(BlueprintReadWrite)
 	float DamageAmount=0.0f;
 };
