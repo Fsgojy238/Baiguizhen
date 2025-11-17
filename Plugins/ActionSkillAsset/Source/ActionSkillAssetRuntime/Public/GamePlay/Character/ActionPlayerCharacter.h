@@ -9,6 +9,7 @@
 #include "InputFold/InputType.h"
 #include "ActionPlayerCharacter.generated.h"
 
+class UActionAttackCollisionComponent;
 struct FCharacterNormalInputData;
 enum class ETriggerEvent : uint8;
 class AActionPlayController;
@@ -42,7 +43,7 @@ protected:
 	UPROPERTY(EditDefaultsOnly,BlueprintReadWrite)
 	UActionAbilitySystemComponent * ActionAbilitySystemComponent;
 	UPROPERTY(EditDefaultsOnly,BlueprintReadWrite)
-	UAttackCollisionComponent * AttackCollisionComponent;
+	UActionAttackCollisionComponent * AttackCollisionComponent;
 	UPROPERTY()
 	AActionPlayController * PlayController;
 	UPROPERTY(BlueprintReadOnly)

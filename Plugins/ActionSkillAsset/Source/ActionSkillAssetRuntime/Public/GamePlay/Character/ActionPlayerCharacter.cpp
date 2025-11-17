@@ -3,6 +3,7 @@
 
 #include "ActionPlayerCharacter.h"
 #include "AbilitySystemComponent.h"
+#include "ActionAttackCollisionComponent.h"
 #include "InputActionValue.h"
 #include "AbilitySystemFold/AbilitySystemCompoentRef/ActionAbilitySystemComponent.h"
 #include "AnimInstance/PostAnimPlayedNotify.h"
@@ -20,7 +21,7 @@ AActionPlayerCharacter::AActionPlayerCharacter()
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	ActionAbilitySystemComponent=CreateDefaultSubobject<UActionAbilitySystemComponent>("ActionAbilitySystemComponent");
-	AttackCollisionComponent=CreateDefaultSubobject<UAttackCollisionComponent>("AttackCollisionCompoent");
+	AttackCollisionComponent=CreateDefaultSubobject<UActionAttackCollisionComponent>("AttackCollisionCompoent");
 	
 }
 

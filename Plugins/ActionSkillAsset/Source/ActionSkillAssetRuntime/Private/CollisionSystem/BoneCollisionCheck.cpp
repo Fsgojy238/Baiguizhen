@@ -41,7 +41,6 @@ void UBoneCollisionCheck::NotifyTick(USkeletalMeshComponent* MeshComp, UAnimSequ
 		ICollisionSystemInterface::Execute_GetAttackCollisionComponent(CSI)->OnAttacktoTagretRecall(FinalHitResult);
 	}
 }
-
 void UBoneCollisionCheck::NotifyEnd(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation,
                                     const FAnimNotifyEventReference& EventReference)
 {
