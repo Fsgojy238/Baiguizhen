@@ -8,6 +8,7 @@
 UAttackCollisionComponent::UAttackCollisionComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;
+	PrimaryComponentTick.TickGroup=TG_DuringPhysics;
 }
 
 FVector UAttackCollisionComponent::GetLastUpdateSocketLocation_Implementation(const FName & SocketName,ECollisionType CollisionType)
