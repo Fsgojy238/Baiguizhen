@@ -48,7 +48,11 @@ void UActionAttackCollisionComponent::OnAttacktoTagretRecall(TArray<FHitResult> 
 		AttackedResult.Attacker=Self;
 		AttackedResult.HitResult=Result;
 		AttackedResult.DamageAmount=1.0f;
-		ICollisionSystemInterface::Execute_GetAttackCollisionComponent(Result.GetActor())->OnBeAttackedRecall(AttackedResult);
+		if(Result.GetActor()->GetClass()->ImplementsInterface(UCollisionSystemInterface::StaticClass()))
+		{
+			ICollisionSystemInterface::Execute_GetAttackCollisionComponent(Result.GetActor())->OnBeAttackedRecall(AttackedResult);
+		}	
+		
 	}
 }
 void UActionAttackCollisionComponent::OnBeAttackedRecall(FAttackedResult AttackedResult)
