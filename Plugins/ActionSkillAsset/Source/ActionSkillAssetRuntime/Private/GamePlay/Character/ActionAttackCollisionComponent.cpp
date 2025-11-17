@@ -58,7 +58,7 @@ void UActionAttackCollisionComponent::OnBeAttackedRecall(FAttackedResult Attacke
 		ICollisionSystemInterface::Execute_OnBeAttackRecallInternal(GetOwner(),AttackedResult);
 	}
 	CanHurt=false;
-	if(!AttackHandle.IsValid()||GetOwner()->GetWorld()->GetTimerManager().IsTimerPending(AttackHandle))
+	if(!AttackHandle.IsValid()||!GetOwner()->GetWorld()->GetTimerManager().IsTimerActive(AttackHandle))
 	{
 		GetOwner()->GetWorld()->GetTimerManager().SetTimer(AttackHandle,[this]()
 		{
