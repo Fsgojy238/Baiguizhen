@@ -19,12 +19,6 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-	UPROPERTY(EditDefaultsOnly)
-	TSubclassOf<UActionCameraMode>   TestCameraMode;
-	UPROPERTY(EditDefaultsOnly)
-	TSubclassOf<UActionCameraMode>   AimCameraMode;
-	UFUNCTION()
-	TSubclassOf<UActionCameraMode> GetSelectedCameraMode();
 	UPROPERTY(BlueprintReadWrite)
 	bool AimCamera;
 public:

@@ -10,7 +10,7 @@ USTRUCT(BlueprintType)
 struct FAttackedResult
 {
 	GENERATED_BODY()
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(BlueprintReadWrite)
 	FHitResult HitResult;
 	UPROPERTY(BlueprintReadWrite)
 	AActor * Attacker=nullptr;

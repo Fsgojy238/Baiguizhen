@@ -18,27 +18,6 @@ void AXActionPlayerCharacter::BeginPlay()
 	Super::BeginPlay();
 	AActionPlayerCameraManager* CameraManager=	Cast<AActionPlayerCameraManager>(PlayController->PlayerCameraManager);
 }
-TSubclassOf<UActionCameraMode> AXActionPlayerCharacter::GetSelectedCameraMode()
-{
-	if(AimCamera)
-	{
-		if(AimCameraMode)
-		{
-			return AimCameraMode;
-		}
-		return nullptr;
-	}
-	else
-	{
-
-		if(TestCameraMode)
-		{
-			return TestCameraMode;
-		}
-		return nullptr;
-	}
-	
-}
 
 
 // Called every frame
