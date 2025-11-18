@@ -38,22 +38,26 @@
 			"Name": "MotionWarping",
 			"Enabled": true
 		},
-      {
-        "Name": "ActionSkillAsset",
-        "Enabled": true
-      },
-      {
-        "Name": "ActionCameraSystem",
-        "Enabled": true
-      },
-      {
-        "Name": "BlockoutToolsPlugin",
-        "Enabled": true,
-        "MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/d337b97aca8947a893526964e179acfd"
-      },
-      {
-        "Name": "EnemyFollow",
-        "Enabled": true
-      }
-        ]
+		{
+			"Name": "ActionSkillAsset",
+			"Enabled": true
+		},
+		{
+			"Name": "ActionCameraSystem",
+			"Enabled": true
+		},
+		{
+			"Name": "BlockoutToolsPlugin",
+			"Enabled": true,
+			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/d337b97aca8947a893526964e179acfd"
+		},
+		{
+			"Name": "EnemyFollow",
+			"Enabled": true
+		},
+		{
+			"Name": "ActionAttributeSystem",
+			"Enabled": true
+		}
+	]
 }

@@ -1,2 +1,5 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=AE62742E_002D5E6D_002DB569_002DDA24_002D14042DBA32F5_002Fd_003APublic_002Fd_003AContainers_002Ff_003AArray_002Eh/@EntryIndexedValue">ForceIncluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=CBD77603_002D1207_002D59E1_002D3DC2_002D003833C2B4AC_002Fd_003APrivate_002Fd_003AUObject_002Ff_003AClass_002Ecpp/@EntryIndexedValue">ForceIncluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=CBD77603_002D1207_002D59E1_002D3DC2_002D003833C2B4AC_002Fd_003APublic_002Fd_003AUObject_002Ff_003AClass_002Eh/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:Boolean x:Key="/Default/CppUnrealEngine/RegenerateUE4ProjectPropertiesOnProjectFileChange/@EntryValue">False</s:Boolean></wpf:ResourceDictionary>
