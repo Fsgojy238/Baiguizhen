@@ -5,10 +5,11 @@
 #include "CoreMinimal.h"
 #include "CameraModeFold/ActionCameraMode.h"
 #include "GamePlay/Character/ActionPlayerCharacter.h"
+#include "Interface/GlobalAttributeInterface.h"
 #include "XActionPlayerCharacter.generated.h"
 
 UCLASS()
-class BAIGUIZHEN_API AXActionPlayerCharacter : public AActionPlayerCharacter
+class BAIGUIZHEN_API AXActionPlayerCharacter : public AActionPlayerCharacter,public IGlobalAttributeInterface
 {
 	GENERATED_BODY()
 

@@ -8,7 +8,7 @@ public class Baiguizhen : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore"});
 
 		PrivateDependencyModuleNames.AddRange(new string[] { 
             "AnimationBlueprintLibrary" ,
@@ -20,7 +20,7 @@ public class Baiguizhen : ModuleRules
 			"EnhancedInput",
 			"GameplayAbilities",
 			"GameplayTags" ,
-			"GameplayTasks","ActionSkillAssetRuntime","ActionCameraSystemAsset"
+			"GameplayTasks","ActionSkillAssetRuntime","ActionCameraSystemAsset","ActionAttributeSystemRuntime"
 			
 		});
 

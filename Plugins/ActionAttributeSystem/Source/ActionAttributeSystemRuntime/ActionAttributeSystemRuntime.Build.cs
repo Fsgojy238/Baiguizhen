@@ -9,7 +9,7 @@ public class ActionAttributeSystemRuntime : ModuleRules
         PublicDependencyModuleNames.AddRange(
             new string[]
             {
-                "Core",
+                "Core"
             }
         );
 
@@ -19,7 +19,10 @@ public class ActionAttributeSystemRuntime : ModuleRules
                 "CoreUObject",
                 "Engine",
                 "Slate",
-                "SlateCore"
+                "SlateCore",
+                "GameplayAbilities",
+                "GameplayTags" ,
+                "GameplayTasks"
             }
         );
     }

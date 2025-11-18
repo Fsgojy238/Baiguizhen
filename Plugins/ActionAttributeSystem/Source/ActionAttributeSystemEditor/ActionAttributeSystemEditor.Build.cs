@@ -19,7 +19,10 @@ public class ActionAttributeSystemEditor : ModuleRules
                 "CoreUObject",
                 "Engine",
                 "Slate",
-                "SlateCore"
+                "SlateCore",
+                "GameplayAbilities",
+                "GameplayTags" ,
+                "GameplayTasks"
             }
         );
     }
