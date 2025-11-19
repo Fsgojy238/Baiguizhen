@@ -50,18 +50,22 @@ void UAttackCollisionComponent::StartTrace(const TArray<FName>& TraceFollowName,
 void UAttackCollisionComponent::EndTrace(ECollisionType CollisionType, const TArray<FName>& TraceFollowName)
 {
 	//通用检测不应该取消骨骼信息
-	if(CollisionType==ECollisionType::GlobalCollision) return;
+	int Allnum=TraceFollowName.Num();
 	if(TraceInfo.Find(CollisionType))
 	{
 		for (FName  TraceName: TraceFollowName)
 		{
-			if(!TraceInfo.Find(CollisionType)->SocketNames.Find(TraceName)) continue;
+			if(!TraceInfo.Find(CollisionType)->SocketNames.Find(TraceName))
+			{
+				Allnum--;
+				continue;
+			}
 			TraceInfo.Find(CollisionType)->SocketNames.Remove (TraceName);
 			TraceInfo.Find(CollisionType)->CurrentSocketLocation.Remove(TraceName);
 			TraceInfo.Find(CollisionType)->LastSocketLocation.Remove(TraceName);
 		}
 	}
-	TraceNum-=TraceFollowName.Num();
+	TraceNum-=Allnum;
 }
 
 void UAttackCollisionComponent::EndTrace(const TArray<FName>& TraceFollowName, ECollisionType CollisionCategory,
@@ -69,11 +73,16 @@ void UAttackCollisionComponent::EndTrace(const TArray<FName>& TraceFollowName, E
 {
 
 	if(CollisionCategory!=ECollisionType::StaticMesh) return;
+	int Allnum=TraceFollowName.Num();
 	if(TraceInfo.Find(CollisionCategory))
 	{
 		for (FName  TraceName: TraceFollowName)
 		{
-			if(!TraceInfo.Find(CollisionCategory)->SocketNames.Find(TraceName)) continue;
+			if(!TraceInfo.Find(CollisionCategory)->SocketNames.Find(TraceName))
+			{
+				Allnum--;
+				continue;
+			}
 			TraceInfo.Find(CollisionCategory)->SocketNames.Remove (TraceName);
 			TraceInfo.Find(CollisionCategory)->CurrentSocketLocation.Remove(TraceName);
 			TraceInfo.Find(CollisionCategory)->LastSocketLocation.Remove(TraceName);
@@ -91,7 +100,7 @@ void UAttackCollisionComponent::EndTrace(const TArray<FName>& TraceFollowName, E
 			}
 		}
 	}
-	TraceNum-=TraceFollowName.Num();
+	TraceNum-=Allnum;
 }
 
 USkeletalMeshComponent* UAttackCollisionComponent::GetSkeletalMeshComponent()

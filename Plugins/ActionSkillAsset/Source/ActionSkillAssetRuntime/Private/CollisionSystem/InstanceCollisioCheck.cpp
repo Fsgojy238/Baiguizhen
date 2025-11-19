@@ -24,7 +24,6 @@ void UInstanceCollisioCheck::Notify(USkeletalMeshComponent* MeshComp, UAnimSeque
  	}
 #endif
 	if(EditCollisionContext.GetCollisionInfo().Num()<=0) return;
-	/*EditCollisionContext.SetPreviewWorld(MeshComp->GetOwner()->GetWorld());*/
 	TArray<FHitResult> FinalHitResult;
 	for (TPair<FName,FCollisionInfoSum> CollisionInfo : EditCollisionContext.GetCollisionInfo())
 	{
@@ -33,9 +32,7 @@ void UInstanceCollisioCheck::Notify(USkeletalMeshComponent* MeshComp, UAnimSeque
 		MeshComp->GetOwner(),CollisionInfo.Key,CollisionInfo.Value,TraceBaseOffset,RotationBaseOffset));
 	}
 	AActor *	CSI=MeshComp->GetOwner();
-	ICollisionSystemInterface * CSIReal=Cast<ICollisionSystemInterface>(CSI);
-	
-	if(CSI && !FinalHitResult.IsEmpty()&&CSIReal)
+	if(CSI && !FinalHitResult.IsEmpty()&&CSI->GetClass()->ImplementsInterface(UCollisionSystemInterface::StaticClass()))
 	{
 		TArray<FName> SocketNames;
 		ICollisionSystemInterface::Execute_GetAttackCollisionComponent(CSI)->StartTrace(SocketNames,EditCollisionContext.CollisionType);

@@ -9,7 +9,7 @@
 #include "XActionPlayerCharacter.generated.h"
 
 UCLASS()
-class BAIGUIZHEN_API AXActionPlayerCharacter : public AActionPlayerCharacter,public IGlobalAttributeInterface
+class BAIGUIZHEN_API AXActionPlayerCharacter : public AActionPlayerCharacter
 {
 	GENERATED_BODY()
 

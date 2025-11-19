@@ -256,8 +256,8 @@ struct FCollisionContext
 		}
 		return TMap<FName,FCollisionInfoSum>();
 	}
-	static void DebugTraceSweep(AActor * Tracer, const TArray<FHitResult> & HitResults,const FCollisionInfoSum & CollisionInfoSum,const FVector & Start, const FVector & End,bool bHit,FLinearColor DebugColor=FLinearColor::Red);
-	static void DebugTraceSweepSingle(AActor * Tracer,FHitResult & HitResults, const FCollisionInfoSum& CollisionInfoSum,const FVector & Start, const FVector & End,bool bHit,FLinearColor DebugColor=FLinearColor::Red);
+	static void DebugTraceSweep(AActor * Tracer, const TArray<FHitResult> & HitResults,const FCollisionInfoSum & CollisionInfoSum,const FVector & Start, const FVector & End,bool bHit,FLinearColor DebugColor=FLinearColor::Red,FRotator RotationOffset=FRotator());
+	static void DebugTraceSweepSingle(AActor * Tracer,FHitResult & HitResults, const FCollisionInfoSum& CollisionInfoSum,const FVector & Start, const FVector & End,bool bHit,FLinearColor DebugColor=FLinearColor::Red,FRotator RotationOffset=FRotator());
 private:
 	void SetCollisionQueryAndCollisionShape(TMap<FName,FCollisionInfoSum> CollisionInfos)
 	{

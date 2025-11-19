@@ -28,8 +28,7 @@ void UContinueGlobalCollisionCheck::NotifyBegin(USkeletalMeshComponent* MeshComp
 	}
 #endif
 	AActor *	CSI=MeshComp->GetOwner();
-	ICollisionSystemInterface * CSIReal=Cast<ICollisionSystemInterface>(CSI);
-	if(CSI&&CSIReal)
+	if(CSI&&CSI->GetClass()->ImplementsInterface(UCollisionSystemInterface::StaticClass()))
 	{
 		TArray<FName> SocketNames;
 		ICollisionSystemInterface::Execute_GetAttackCollisionComponent(CSI)->StartTrace(SocketNames,EditCollisionContext.CollisionType);
@@ -50,9 +49,7 @@ void UContinueGlobalCollisionCheck::NotifyTick(USkeletalMeshComponent* MeshComp,
 			MeshComp->GetOwner(),CollisionInfo.Key,CollisionInfo.Value,TraceBaseOffset,RotationBaseOffset));
 	}
 	AActor *	CSI=MeshComp->GetOwner();
-	ICollisionSystemInterface * CSIReal=Cast<ICollisionSystemInterface>(CSI);
-	
-	if(CSI && !FinalHitResult.IsEmpty()&&CSIReal)
+	if(CSI && !FinalHitResult.IsEmpty()&&CSI->GetClass()->ImplementsInterface(UCollisionSystemInterface::StaticClass()))
 	{
 		ICollisionSystemInterface::Execute_GetAttackCollisionComponent(CSI)->OnAttacktoTagretRecall(FinalHitResult);
 		
@@ -64,8 +61,7 @@ void UContinueGlobalCollisionCheck::NotifyEnd(USkeletalMeshComponent* MeshComp, 
 {
 	Super::NotifyEnd(MeshComp, Animation, EventReference);
 	AActor *	CSI=MeshComp->GetOwner();
-	ICollisionSystemInterface * CSIReal=Cast<ICollisionSystemInterface>(CSI);
-	if(CSI &&CSIReal)
+	if(CSI &&CSI->GetClass()->ImplementsInterface(UCollisionSystemInterface::StaticClass()))
 	{
 		TArray<FName> SocketNames;
 		ICollisionSystemInterface::Execute_GetAttackCollisionComponent(CSI)->EndTrace(EditCollisionContext.CollisionType,SocketNames);
