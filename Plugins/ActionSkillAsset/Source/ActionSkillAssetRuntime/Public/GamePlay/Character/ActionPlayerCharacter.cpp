@@ -9,8 +9,8 @@
 #include "AnimInstance/PostAnimPlayedNotify.h"
 #include "GamePlay/ActionPlayController.h"
 #include "InputFold/EnhancedInput/ActionInputComponent.h"
-#include "Camera/CameraComponent.h"
-#include "GameFramework/SpringArmComponent.h"
+#include "EnemyFollow/Component/ActionEnemyFollowComponent.h"
+#include "MotionWarpingComponent.h"
 #include "GamePlayTag/GamePlayTags.h"
 #include "Kismet/KismetMathLibrary.h"
 
@@ -21,8 +21,9 @@ AActionPlayerCharacter::AActionPlayerCharacter()
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	ActionAbilitySystemComponent=CreateDefaultSubobject<UActionAbilitySystemComponent>("ActionAbilitySystemComponent");
-	AttackCollisionComponent=CreateDefaultSubobject<UActionAttackCollisionComponent>("AttackCollisionCompoent");
-	
+	AttackCollisionComponent=CreateDefaultSubobject<UActionAttackCollisionComponent>("AttackCollisionComponent");
+	EnemyFollowComponent=CreateDefaultSubobject<UActionEnemyFollowComponent>("ActionEnemyFollowComponent");
+	MotionWarpingComponent=CreateDefaultSubobject<UMotionWarpingComponent>("MotionWarpingComponent");
 }
 
 UAbilitySystemComponent* AActionPlayerCharacter::GetAbilitySystemComponent() const

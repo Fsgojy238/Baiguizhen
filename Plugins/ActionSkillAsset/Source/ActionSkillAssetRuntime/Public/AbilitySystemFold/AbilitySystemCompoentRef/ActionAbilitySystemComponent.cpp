@@ -205,11 +205,11 @@ AActionPlayerCharacter* UActionAbilitySystemComponent::GetActionPlayerCharacter(
 	return Cast<AActionPlayerCharacter>(GetOwnerActor());
 }
 
-FCharacterNormalInputData UActionAbilitySystemComponent::GetCharacterNormalInputData()
+FCharacterNormalInputData UActionAbilitySystemComponent::GetControlledCharacterNormalInputData()
 {
-	return GetActionPlayerCharacter()->GetCharacterNormalInputData();
+	ICharacterInfoInterface *CII=Cast<ICharacterInfoInterface>(GetActionPlayerCharacter());
+	return CII->GetCharacterNormalInputData();
 }
-
 void UActionAbilitySystemComponent::SetCurrentStateTag(FGameplayTag NewStateTag)
 {
 	FGameplayTag LastStateTag=CurrentStateTag;
