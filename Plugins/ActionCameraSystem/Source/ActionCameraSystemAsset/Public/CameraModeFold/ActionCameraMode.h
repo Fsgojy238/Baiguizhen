@@ -113,7 +113,7 @@ protected:
 private:
 	float BlendAlpha=0.0f;
 	float BlendWeight=0.0f;
-	FVector LastPivot;
+	mutable  FVector LastPivot;
 	UPROPERTY()
 	AActor * SettledTargetActor;
 };

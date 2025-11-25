@@ -104,6 +104,10 @@ FVector UActionCameraMode::GetPivotAfterOffsetLocation() const
 
 void UActionCameraMode::UpdateSpringArmFunc(FActionCameraNormalViewInfo& CameraNormalViewInfo,float Deltatime)
 {
+	if(LastPivot.IsNearlyZero())
+	{
+		LastPivot=GetPivotLocation();
+	}
 	FVector ArmOrigin=FMath::VInterpTo(LastPivot,CameraNormalViewInfo.CameraLocation,Deltatime,GetPlayerCameraManager()->PivotLagSpeed);
 	FVector DesiredLoc=ArmOrigin+SpringArmInfo.TargetOffset;
 	LastPivot=ArmOrigin;
@@ -203,6 +207,7 @@ FActionCameraNormalViewInfo UActionCameraMode::GetActionCameraViewInfo() const
 void UActionCameraMode::OnActivation()
 {
 	OnActivationBP();
+
 }
 
 void UActionCameraMode::OnActivationBP_Implementation()

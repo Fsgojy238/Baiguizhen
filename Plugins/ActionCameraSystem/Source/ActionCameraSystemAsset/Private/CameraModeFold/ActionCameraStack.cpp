@@ -45,6 +45,7 @@ void UActionCameraStack::DrawDebug(UCanvas* Canvas)
 		check(CameraMode)
 		CameraMode->DrawDebug(Canvas);
 	}
+	DrawDebugSphere(GetOuter()->GetWorld(),GetPivotLocation(),30,3,FColor::Black,false,0.1,3,3);
 }
 
 void UActionCameraStack::GetBlendWeightByTag(FGameplayTag ModeTag, float& BlendWeight)
@@ -206,13 +207,14 @@ void UActionCameraStack::BlendStack(float DeltaTime,FActionCameraNormalViewInfo 
 void UActionCameraStack::UpdatePivot(float DeltaTime)
 {
 	const int32 StackSize=CameraModeStack.Num();
+	
 	if(StackSize<=0)
 	{
 		return;
 	}
 	const  UActionCameraMode *	CameraMode=CameraModeStack[StackSize-1];
 	check(CameraMode);
-	PivotLocation=CameraMode->GetPivotLocation();
+	PivotLocation=CameraMode->GetPivotAfterOffsetLocation();
 	for (int StackIndex=StackSize-2;StackIndex>=0;StackIndex--)
 	{
 		CameraMode=CameraModeStack[StackIndex];
