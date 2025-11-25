@@ -121,7 +121,7 @@ void AActionPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerIn
 
 void AActionPlayerCharacter::OnAbilityInputTrigger(const FInputActionInstance& InputInfo, FGameplayTag InputData,ETriggerEvent TriggerEvent)
 {
-	UE_LOG(LogTemp,Warning,TEXT("%s"),*InputData.ToString());
+	
 	if (TriggerEvent==ETriggerEvent::Started ||InputInfo.GetTriggerEvent()==ETriggerEvent::Completed)
 	{
 		ActionAbilitySystemComponent->AbilityInputDataLocalProcessing(InputInfo,InputData,GetInputDataAsset(),TriggerEvent);

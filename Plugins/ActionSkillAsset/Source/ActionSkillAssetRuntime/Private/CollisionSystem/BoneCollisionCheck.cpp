@@ -5,11 +5,7 @@
 
 #include "CollisionSystem/Interface/CollisionSystemInterface.h"
 
-void UBoneCollisionCheck::OnAnimNotifyCreatedInEditor(FAnimNotifyEvent& ContainingAnimNotifyEvent)
-{
-	Super::OnAnimNotifyCreatedInEditor(ContainingAnimNotifyEvent);
-	EditCollisionContext.CollisionType=ECollisionType::SkeletalMesh;
-}
+
 
 void UBoneCollisionCheck::NotifyBegin(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation,
 	float TotalDuration, const FAnimNotifyEventReference& EventReference)
@@ -51,7 +47,12 @@ void UBoneCollisionCheck::NotifyEnd(USkeletalMeshComponent* MeshComp, UAnimSeque
 		ICollisionSystemInterface::Execute_GetAttackCollisionComponent(CSI)->EndTrace(EditCollisionContext.CollisionType,SocketNames);
 	}
 }
-
+#if WITH_EDITOR
+void UBoneCollisionCheck::OnAnimNotifyCreatedInEditor(FAnimNotifyEvent& ContainingAnimNotifyEvent)
+{
+	Super::OnAnimNotifyCreatedInEditor(ContainingAnimNotifyEvent);
+	EditCollisionContext.CollisionType=ECollisionType::SkeletalMesh;
+}
 void UBoneCollisionCheck::PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent)
 {
 	Super::PostEditChangeProperty(PropertyChangedEvent);
@@ -65,3 +66,4 @@ void UBoneCollisionCheck::PostEditChangeProperty(struct FPropertyChangedEvent& P
 		}
 	}
 }
+#endif

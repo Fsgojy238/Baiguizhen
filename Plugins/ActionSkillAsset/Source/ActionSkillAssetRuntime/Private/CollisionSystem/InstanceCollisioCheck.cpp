@@ -40,7 +40,7 @@ void UInstanceCollisioCheck::Notify(USkeletalMeshComponent* MeshComp, UAnimSeque
 		ICollisionSystemInterface::Execute_GetAttackCollisionComponent(CSI)->EndTrace(EditCollisionContext.CollisionType,SocketNames);
 	}
 }
-
+#if WITH_EDITOR
 void UInstanceCollisioCheck::PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent)
 {	//主要是要修改这里要对更改数值时进行同步处理。
 	Super::PostEditChangeProperty(PropertyChangedEvent);
@@ -72,6 +72,6 @@ void UInstanceCollisioCheck::PostEditChangeProperty(struct FPropertyChangedEvent
 		EditCollisionContext.RefreshTargetPointAndSaveAll();
 	}
 }
-
+#endif
 
 

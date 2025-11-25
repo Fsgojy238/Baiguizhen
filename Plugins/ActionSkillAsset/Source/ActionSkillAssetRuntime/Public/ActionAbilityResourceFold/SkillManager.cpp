@@ -116,7 +116,6 @@ void USkillManager::UpdateAutoSkillCheck()
 			bCheckAutoChildrenSkill=false;	
 		   StartSelectedSkillConfig(FinalConfig,FSkillTitle());
 			GetOwnerAbilitySystemComponent()->SetCurrentInputState(EInputState::DisableInputState);
-			UE_LOG(LogTemp,Warning,TEXT("Execute Skill"))
 		}
 		return;
 	}
@@ -178,6 +177,7 @@ USkillExecutorConfig* USkillManager::FindNextSkillExecutor(ESkillReleaseType Ski
 	if (!SelectedSkill)
 	{	//再寻找Root
 		FindCanExecuteSkillConfigFromRoot(SelectedSkill,SkillTriggerType,InputInfo);
+		UE_LOG(LogTemp,Warning,TEXT("Don't have Selected Skill And find Root"));
 	}
 	return SelectedSkill;
 }
@@ -192,10 +192,12 @@ USkillExecutorConfig * USkillManager::FindCanExecuteSkillExecutorFromChildren(ES
 	if(!bFind) return NeededConfig;
 	//检查其下面有咩有能够执行的
 	//如果符合条件那么就判断需要的tag有没有然后再判断权重
+	UE_LOG(LogTemp,Warning,TEXT("ChildNum %d"),ParentConfig->Children.Num());
 	if (ParentConfig && ParentConfig->Children.Num() > 0)
 	{
 		for (auto SkillConfig:ParentConfig->Children)
 		{
+			
 			if(SkillConfig->ExecutorDescriptor.Condition)
 			{
 				if(!SkillConfig->ExecutorDescriptor.Condition->CanTransition(GetOwnerAbilitySystemComponent()->GetActionPlayerCharacter(),GetOwnerAbilitySystemComponent(),this)) continue;

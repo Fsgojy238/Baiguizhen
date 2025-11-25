@@ -4,12 +4,44 @@
 #include "CollisionSystem/ContinueGlobalCollisionCheck.h"
 
 #include "CollisionSystem/Interface/CollisionSystemInterface.h"
-
+#if WITH_EDITOR
 void UContinueGlobalCollisionCheck::OnAnimNotifyCreatedInEditor(FAnimNotifyEvent& ContainingAnimNotifyEvent)
 {
 	Super::OnAnimNotifyCreatedInEditor(ContainingAnimNotifyEvent);
 	EditCollisionContext.CollisionType=ECollisionType::GlobalCollision;
 }
+void UContinueGlobalCollisionCheck::PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent)
+{
+	Super::PostEditChangeProperty(PropertyChangedEvent);
+	EditCollisionContext.SetCollisionInfo();
+	if(PropertyChangedEvent.Property && PropertyChangedEvent.Property->GetName()==TEXT("CollisionType"))
+	{	//强制改成GlobalCollision
+		if(EditCollisionContext.CollisionType !=ECollisionType::GlobalCollision)
+		{
+			FMessageDialog::Open(EAppMsgType::Ok, FText::FromString(TEXT("InstanceCollisionCheck must be GlobalCollision")));
+			EditCollisionContext.CollisionType=ECollisionType::GlobalCollision;
+		}
+	}
+	if(PropertyChangedEvent.Property && PropertyChangedEvent.Property->GetName()==TEXT("Icon"))
+	{
+		EditCollisionContext.RefreshTargetIcon();
+	}
+	//修改变量
+	if(PropertyChangedEvent.Property->GetName()==TEXT("X") || PropertyChangedEvent.Property->GetName()==TEXT("Y")|| PropertyChangedEvent.Property->GetName()==TEXT("Z")
+		&& PropertyChangedEvent.ChangeType==EPropertyChangeType::ValueSet)
+	{
+		for (TPair<FName,FCollisionInfoSum> & CollisionInfo :EditCollisionContext.GlobalCollision)
+		{	if(!EditCollisionContext.PreviewWorld) break;
+			CollisionInfo.Value.SetTargetPoint();
+		}
+	}
+	//更改数组。
+	if(PropertyChangedEvent.ChangeType&(EPropertyChangeType::ArrayAdd |EPropertyChangeType::ArrayRemove|EPropertyChangeType::ArrayClear))
+	{
+		EditCollisionContext.RefreshTargetPointAndSaveAll();
+	}
+}
+#endif
 void UContinueGlobalCollisionCheck::NotifyBegin(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation,
 	float TotalDuration, const FAnimNotifyEventReference& EventReference)
 {
@@ -68,34 +100,4 @@ void UContinueGlobalCollisionCheck::NotifyEnd(USkeletalMeshComponent* MeshComp, 
 	}
 }
 
-void UContinueGlobalCollisionCheck::PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent)
-{
-	Super::PostEditChangeProperty(PropertyChangedEvent);
-	EditCollisionContext.SetCollisionInfo();
-	if(PropertyChangedEvent.Property && PropertyChangedEvent.Property->GetName()==TEXT("CollisionType"))
-	{	//强制改成GlobalCollision
-		if(EditCollisionContext.CollisionType !=ECollisionType::GlobalCollision)
-		{
-			FMessageDialog::Open(EAppMsgType::Ok, FText::FromString(TEXT("InstanceCollisionCheck must be GlobalCollision")));
-			EditCollisionContext.CollisionType=ECollisionType::GlobalCollision;
-		}
-	}
-	if(PropertyChangedEvent.Property && PropertyChangedEvent.Property->GetName()==TEXT("Icon"))
-	{
-		EditCollisionContext.RefreshTargetIcon();
-	}
-	//修改变量
-	if(PropertyChangedEvent.Property->GetName()==TEXT("X") || PropertyChangedEvent.Property->GetName()==TEXT("Y")|| PropertyChangedEvent.Property->GetName()==TEXT("Z")
-		&& PropertyChangedEvent.ChangeType==EPropertyChangeType::ValueSet)
-	{
-		for (TPair<FName,FCollisionInfoSum> & CollisionInfo :EditCollisionContext.GlobalCollision)
-		{	if(!EditCollisionContext.PreviewWorld) break;
-			CollisionInfo.Value.SetTargetPoint();
-		}
-	}
-	//更改数组。
-	if(PropertyChangedEvent.ChangeType&(EPropertyChangeType::ArrayAdd |EPropertyChangeType::ArrayRemove|EPropertyChangeType::ArrayClear))
-	{
-		EditCollisionContext.RefreshTargetPointAndSaveAll();
-	}
-}
+

@@ -229,7 +229,6 @@ void UActionAbilitySystemComponent::SetCurrentInputState(EInputState NewInputSta
  		CurrentInputState=NewInputState;
  		OnInputStateChanged.Broadcast(LastInputState,CurrentInputState);
  	}
-	UE_LOG(LogTemp,Warning,TEXT("NewInputState is Equal With NewInputState"));
 }
 
 bool UActionAbilitySystemComponent::CheckInputLengthToSetInputLock(float InputLength)

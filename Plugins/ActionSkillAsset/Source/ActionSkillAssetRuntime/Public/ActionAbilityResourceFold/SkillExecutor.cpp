@@ -26,7 +26,6 @@ void USkillExecutor::SkillExecutorTickFunc(float DeltaTime)
 
 void USkillExecutor::InitializeSkill(FSkillTitle InputSkill,USkillManager * inSkillManager)
 {
-	UE_LOG(LogTemp,Warning,TEXT("%s StartInitial Skill"),*GetName());
 	//记录当前的游戏时间和按键映射
 	CurrentTime=InputSkill.InputTime;
 	HoldSkill.HoldSkillInfo.CurrentHoldTime=0;
@@ -182,7 +181,6 @@ void USkillExecutor::InitializeAbility(UActionAbilitySystemComponent * OwnerAbil
 void USkillExecutor::OnSkillTrigger(FSkillTitle TriggerInput)
 {
 	CurrentPressInfo=TriggerInput;
-	UE_LOG(LogTemp,Warning,TEXT(" initial %s post %s"),*InitalPressInfo.SkillInputId.ToString(),*TriggerInput.SkillInputId.ToString())
 	//这里判断的是蓄力和连击存在的情况,当松开时如果时间太小那么就直接走连击如果时间大于最小时间那么就走蓄力
 	if (CurrentPressInfo==InitalPressInfo&& bNeedHoldSkill &&CurrentPressInfo.InputType==EInputType::Release &&FinalSelectedSkillType==ESkillType::HoldSkill)
 	{	float IntervalTime=GWorld->GetTimeSeconds()-CurrentTime;
@@ -190,7 +188,6 @@ void USkillExecutor::OnSkillTrigger(FSkillTitle TriggerInput)
 		//不根据这个时间来判断,判断部分写在动画播放哪里
 		if ((!bNeedMultiTipSkill ||(bNeedMultiTipSkill && IntervalTime>=HoldSkill.HoldSkillInfo.MinHoldTime) )&& HoldSkill.HoldType==EPreHoldTimeType::Loop)
 		{
-			UE_LOG(LogTemp,Warning,TEXT("%s OnTriggeredSkill To Hold Loop"),*GetName());
 			TVariant<TSubclassOf<USkillClip_PlayMontage>, TSubclassOf<USkillClipAbilityBase>> HoldAbility;
 			HoldAbility=FSkillContainer::MakeVariantSkill(HoldSkill.HoldSkillClass.GetCurrentSkill());
 			LodeSkillClip.Enqueue(HoldAbility);
@@ -238,7 +235,6 @@ void USkillExecutor::OnSkillTrigger(FSkillTitle TriggerInput)
 void USkillExecutor::InterruptExecution()
 {
 	ResetSkill();
-	UE_LOG(LogTemp,Warning,TEXT("%s be Interupt"),*GetName());
 }
 
 void USkillExecutor::OnPreClipEnd()

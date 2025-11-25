@@ -44,13 +44,12 @@ void USkillClipAbilityBase::EndAbility(const FGameplayAbilitySpecHandle Handle,
 {
 	if (bIsExiting)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("%s is already exiting, skipping..."), *GetName());
 		return;
 	}
 	bIsExiting = true;;
 	if (!AbilityEvent.ExecuteIfBound())
 	{
-		UE_LOG(LogTemp,Warning,TEXT("%s don't bind End Event"),*GetName());
+		
 	}
 	AbilityEvent.Clear();
 	Super::EndAbility(Handle, ActorInfo, ActivationInfo, bReplicateEndAbility, bWasCancelled);

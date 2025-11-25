@@ -11,10 +11,8 @@ public class Baiguizhen : ModuleRules
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore"});
 
 		PrivateDependencyModuleNames.AddRange(new string[] { 
-            "AnimationBlueprintLibrary" ,
             "MotionWarping",
 			"Niagara",
-			"StateTreeModule" ,
 			"GameplayStateTreeModule",
 			"AnimGraphRuntime",
 			"EnhancedInput",
