@@ -52,6 +52,7 @@ private:
 	void HandleModelAssetChanged();
 	void HandleModelSelectionChanged(const TArray<TWeakObjectPtr<USkillExecutorConfig>>& SelectedStates);
 	void UpdateAsset();
+	void DeepCopySubTree(USkillExecutorConfig* Source, USkillExecutorConfig* Destination);
 	TSharedPtr<IDetailsView> SelectionDetailsView;
 	FDelegateHandle OnPackageSavedDelegateHandle;
 	TObjectPtr<USkillExecutorDescriptorAsset> EditingSkillExecutorDescriptorAsset;

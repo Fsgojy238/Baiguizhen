@@ -268,7 +268,33 @@ void FSkillExecutorConfigEditor::UpdateAsset()
 	}
 	//直接复制过来。
 	USkillExecutorEditorData * EditorData=Cast<USkillExecutorEditorData>(EditingSkillExecutorDescriptorAsset->EditorData);
-	EditingSkillExecutorDescriptorAsset->ExecutorConfigs=EditorData->SubTrees;
+	EditingSkillExecutorDescriptorAsset->ExecutorConfigs.Empty();
+	for (USkillExecutorConfig* SubTree : EditorData->SubTrees)
+	{
+		if (SubTree)
+		{
+			USkillExecutorConfig* NewSubTree = DuplicateObject<USkillExecutorConfig>(SubTree, EditingSkillExecutorDescriptorAsset);
+			EditingSkillExecutorDescriptorAsset->ExecutorConfigs.Add(NewSubTree);
+
+			// 递归深拷贝子树
+			DeepCopySubTree(SubTree, NewSubTree);
+		}
+	}
+}
+void FSkillExecutorConfigEditor::DeepCopySubTree(USkillExecutorConfig* Source, USkillExecutorConfig* Destination)
+{
+	Destination->Children.Empty();
+	for (USkillExecutorConfig* Child : Source->Children)
+	{
+		if (Child)
+		{
+			USkillExecutorConfig* NewChild = DuplicateObject<USkillExecutorConfig>(Child, Destination);
+			NewChild->Parent=Destination;
+			Destination->Children.Add(NewChild);
+			// 递归处理子树的子树
+			DeepCopySubTree(Child, NewChild);
+		}
+	}
 }
 #pragma endregion 
 

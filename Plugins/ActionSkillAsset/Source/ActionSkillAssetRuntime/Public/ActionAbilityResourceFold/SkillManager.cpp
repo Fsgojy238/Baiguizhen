@@ -192,7 +192,6 @@ USkillExecutorConfig * USkillManager::FindCanExecuteSkillExecutorFromChildren(ES
 	if(!bFind) return NeededConfig;
 	//检查其下面有咩有能够执行的
 	//如果符合条件那么就判断需要的tag有没有然后再判断权重
-	UE_LOG(LogTemp,Warning,TEXT("ChildNum %d"),ParentConfig->Children.Num());
 	if (ParentConfig && ParentConfig->Children.Num() > 0)
 	{
 		for (auto SkillConfig:ParentConfig->Children)
@@ -283,6 +282,7 @@ void USkillManager::StartSelectedSkillConfig(USkillExecutorConfig* SelectedConfi
 	check(SelectedConfig);
 	ShutdownCurrentSkillExecutor();
 	SetSelectedSkillConfig(SelectedConfig);
+	UE_LOG(LogTemp,Warning,TEXT("CurrenSelectedSkill %s"),*SelectedConfig->SkillDescriptorName.ToString());
 	//设置自动技能检测
 	TArray<USkillExecutorConfig *> AutoSkillConfigs;
 	FindCorrectSkillConfigsFromRootAndParent(AutoSkillConfigs,SelectedConfig,ESkillReleaseType::Auto);

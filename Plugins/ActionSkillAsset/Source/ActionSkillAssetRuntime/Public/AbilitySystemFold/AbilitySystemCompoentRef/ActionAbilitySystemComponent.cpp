@@ -68,7 +68,6 @@ void UActionAbilitySystemComponent::AbilityInputDataLocalProcessing(const FInput
 			OnAbilityInputEnd(InputInfo,InputData,InputDataAsset);
 		break;
 	}
-	
 }
 
 void UActionAbilitySystemComponent::OnAbilityInputStart(const FInputActionInstance& InputInfo,FGameplayTag InputTag, UInputDataAsset * InputDataAsset)
