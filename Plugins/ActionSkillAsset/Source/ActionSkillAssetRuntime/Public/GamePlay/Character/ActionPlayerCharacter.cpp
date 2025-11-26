@@ -98,6 +98,7 @@ void AActionPlayerCharacter::OnInputLook(const FInputActionValue&  InputActionVa
 
 void AActionPlayerCharacter::ProcessLook(const FInputActionValue& InputActionValue)
 {
+	//TODO:: 摄像机限制了但是没有限制控制器导致pitch轴会有时候对不齐。导致摄像机正常但是人走不动
 	AddControllerYawInput(CharacterNormalInputData.LookInputValue.X*0.5);
 	AddControllerPitchInput(CharacterNormalInputData.LookInputValue.Y*0.5);
 }
@@ -108,6 +109,7 @@ void AActionPlayerCharacter::CheckPostAnimPlayAndStop()
 	{
 		GetMesh()->GetAnimInstance()->Montage_StopGroupByName(0,AttackSlotGroupName);
 		GetActionAbilitySystemComponent()->RemoveLooseGameplayTag(GamePlayTags::PostAnim);
+		UE_LOG(LogTemp,Warning,TEXT("StopMontageUseNotify"))
 	}
 }
 

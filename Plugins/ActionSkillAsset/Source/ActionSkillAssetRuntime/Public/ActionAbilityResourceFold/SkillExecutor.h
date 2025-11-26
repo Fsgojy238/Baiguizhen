@@ -36,10 +36,11 @@ public:
 	void OnPreClipEnd();
 	UFUNCTION()
 	void OnClipEnd();
-	
+	bool DoOnceAttackRelease=false;
 private:
 	void PlayClip(TVariant<TSubclassOf<USkillClip_PlayMontage>,TSubclassOf<USkillClipAbilityBase>> Clip,FName BindFunction);
 	void ResetSkill();
+	
 	void StopCurrentSkill(TVariant<TSubclassOf<USkillClip_PlayMontage>,TSubclassOf<USkillClipAbilityBase>> Clip);
 	UPROPERTY()
 	TWeakObjectPtr<USkillManager> SkillManager;

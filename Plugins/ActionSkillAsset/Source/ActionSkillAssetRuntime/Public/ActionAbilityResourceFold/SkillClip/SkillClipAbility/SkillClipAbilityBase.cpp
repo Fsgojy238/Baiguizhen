@@ -32,7 +32,7 @@ void USkillClipAbilityBase::PreEntryAbility_Implementation()
 }
 void USkillClipAbilityBase::OnEntryAbility_Implementation()
 {
-	
+		
 }
 void USkillClipAbilityBase::OnEndAbility_Implementation()
 {
@@ -47,6 +47,7 @@ void USkillClipAbilityBase::EndAbility(const FGameplayAbilitySpecHandle Handle,
 		return;
 	}
 	bIsExiting = true;;
+	UE_LOG(LogTemp,Warning,TEXT("SkillEnd"))
 	if (!AbilityEvent.ExecuteIfBound())
 	{
 		

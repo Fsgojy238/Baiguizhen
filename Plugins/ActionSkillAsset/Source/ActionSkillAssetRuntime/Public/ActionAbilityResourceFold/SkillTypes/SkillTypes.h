@@ -18,8 +18,8 @@ enum class  ESkillCLipType:uint8
 UENUM(BlueprintType)
 enum class EInputType: uint8
 {
-	Press,
-	Release,
+	Press=0,
+	Release=1,
 };
 UENUM(BlueprintType)
 enum  class EPreHoldTimeType:uint8

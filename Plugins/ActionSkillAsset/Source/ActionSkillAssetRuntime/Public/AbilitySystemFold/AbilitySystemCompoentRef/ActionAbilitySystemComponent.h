@@ -30,7 +30,7 @@ public:
 	UActionAbilitySystemComponent();
 
 protected:
-
+	virtual void DisplayDebug(class UCanvas* Canvas, const class FDebugDisplayInfo& DebugDisplay, float& YL, float& YPos) override;
 	// Called when the game starts
 	virtual void BeginPlay() override;
 

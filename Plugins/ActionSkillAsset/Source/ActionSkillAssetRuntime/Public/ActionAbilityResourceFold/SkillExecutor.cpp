@@ -32,6 +32,7 @@ void USkillExecutor::InitializeSkill(FSkillTitle InputSkill,USkillManager * inSk
 	InitalPressInfo=InputSkill;
 	SkillManager=inSkillManager;
 	IsActive=true;
+	DoOnceAttackRelease=false;
 	if(bNeedHoldSkill && InputSkill.InputType==EInputType::Release)
 	{
 		TVariant<TSubclassOf<USkillClip_PlayMontage>, TSubclassOf<USkillClipAbilityBase>> Clip;
@@ -183,7 +184,9 @@ void USkillExecutor::OnSkillTrigger(FSkillTitle TriggerInput)
 	CurrentPressInfo=TriggerInput;
 	//这里判断的是蓄力和连击存在的情况,当松开时如果时间太小那么就直接走连击如果时间大于最小时间那么就走蓄力
 	if (CurrentPressInfo==InitalPressInfo&& bNeedHoldSkill &&CurrentPressInfo.InputType==EInputType::Release &&FinalSelectedSkillType==ESkillType::HoldSkill)
-	{	float IntervalTime=GWorld->GetTimeSeconds()-CurrentTime;
+	{
+		if(DoOnceAttackRelease) return;
+		float IntervalTime=GWorld->GetTimeSeconds()-CurrentTime;
 		HoldSkill.HoldSkillInfo.CurrentHoldTime=IntervalTime;
 		//不根据这个时间来判断,判断部分写在动画播放哪里
 		if ((!bNeedMultiTipSkill ||(bNeedMultiTipSkill && IntervalTime>=HoldSkill.HoldSkillInfo.MinHoldTime) )&& HoldSkill.HoldType==EPreHoldTimeType::Loop)
@@ -198,12 +201,15 @@ void USkillExecutor::OnSkillTrigger(FSkillTitle TriggerInput)
 				LodeSkillClip.Enqueue(Post);
 			}
 			StopCurrentSkill(FSkillContainer::MakeVariantSkill(PreTipContent.GetCurrentSkill()));
+			
 			return;
 		}
 		//当为不为循环动画时根据当前的情况释放，要保证这个最小释放的时间要比蓄力阶段动画时间短。
 		if (!bNeedMultiTipSkill && HoldSkill.HoldType==EPreHoldTimeType::Once && IntervalTime<=HoldSkill.HoldSkillInfo.MinHoldTime)
 		{
+		
 			StopCurrentSkill(FSkillContainer::MakeVariantSkill(PreTipContent.GetCurrentSkill()));
+			GEngine->AddOnScreenDebugMessage(-1,5.0f,FColor::Black,FString::Printf(TEXT("SropCurrentSkill")));
 			return;
 		}
 		//循环动画都不行并且有连击内容时走连击 不允许在once那里使用
@@ -243,7 +249,13 @@ void USkillExecutor::OnPreClipEnd()
 	bool SuccessGet=LodeSkillClip.Dequeue(Out);
 	if (SuccessGet)
 	{
+		DoOnceAttackRelease=true;
+		GEngine->AddOnScreenDebugMessage(-1,1,FColor::Black,TEXT("PreClipEnd"));
 		PlayClip(Out,TEXT("OnClipEnd"));
+	}
+	else
+	{
+		ResetSkill();
 	}
 }
 void USkillExecutor::OnClipEnd()
@@ -251,6 +263,8 @@ void USkillExecutor::OnClipEnd()
 	TVariant<TSubclassOf<USkillClip_PlayMontage>, TSubclassOf<USkillClipAbilityBase>> Out;
 	if (LodeSkillClip.Dequeue(Out))
 	{
+		GEngine->AddOnScreenDebugMessage(-1,1,FColor::Black,TEXT("PreClipEnd"));
+		PlayClip(Out,TEXT("OnClipEnd"));
 		PlayClip(Out,TEXT("OnClipEnd"));
 	}
 	else
@@ -298,6 +312,7 @@ void USkillExecutor::ResetSkill()
 	HoldSkill.HoldSkillInfo.CurrentHoldTime=0;
 	LastExeClip=nullptr;
 	LastExeAbilitySpecHandle=FGameplayAbilitySpecHandle();
+	DoOnceAttackRelease=false;
 	if (PlayedMontage)
 	{
 		PlayedMontage->OnExitThisClip();
