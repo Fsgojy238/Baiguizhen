@@ -28,9 +28,11 @@ void UActionAbilitySystemComponent::DisplayDebug(class UCanvas* Canvas, const cl
 	FDisplayDebugManager& DisplayDebugManager = Canvas->DisplayDebugManager;
 	for(auto var:InputTagsInBuff)
 	{
-		
 		DisplayDebugManager.DrawString(FString::Printf(TEXT("CurrentFov: %s"),*var.InputTag.ToString()));
-		
+	}
+	for (auto var:InputDataMap)
+	{
+		DisplayDebugManager.DrawString(FString::Printf(TEXT("InputTag %s is Press %d"),*var.Key.ToString(),var.Value.InputType==EInputType::Press));
 	}
 }
 
@@ -181,10 +183,8 @@ void UActionAbilitySystemComponent::OnTurnNormalInputToCheckStillHasPressSkill(E
 	//应该还是担心自动的内容
 	if(SkillManager->SelectedSkillExecutorConfig&&SkillManager->SelectedSkillExecutorConfig->ExecutorDescriptor.Executor->IsActive) return;
 	FInputData FinalInputData;
-	
 	for(TPair<FGameplayTag,FSkillTitle> & InputData:InputDataMap)
 	{
-		UE_LOG(LogTemp,Warning,TEXT("InputTag %s  Type %d"),*InputData.Value.InputTag.ToString(),InputData.Value.InputType==EInputType::Press)
 		if(InputData.Value.InputType==EInputType::Press )
 		{
 			//找那个权重更大
@@ -362,27 +362,24 @@ void UActionAbilitySystemComponent::OnInputFinal(const FAbilityInputInfo& InputI
 {
 	FSkillTitle SkillTitle = *InputDataMap.Find(InputInfo.InputTag);
 	// 尝试执行技能
-	if (SkillManager->TurnToNextSkillExecutor(ESkillReleaseType::Manual, SkillTitle))
-	{
-		// 成功执行，退出循环
-		return;
-	}
+	if (SkillManager->TurnToNextSkillExecutor(ESkillReleaseType::Manual, SkillTitle)) return;
 	InputTagsInBuff.RemoveAll([&](const FAbilityInputInfo& inInputInfo)
-	{
-		return inInputInfo.InputTag == InputInfo.InputTag;
-	});
+	{return inInputInfo.InputTag == InputInfo.InputTag;});
 	while (InputTagsInBuff.Num() > 0)
 	{
 		FAbilityInputInfo HighestWeightInputInfo;
-		// 如果执行失败，从缓冲区中移除当前权重最高的输入
-		InputTagsInBuff.RemoveAll([&](const FAbilityInputInfo& InputInfo)
-		{
-			return InputInfo.InputTag == HighestWeightInputInfo.InputTag;
-		});
 		if (!FindExecuteAbilityInputInfo(InputTagsInBuff, HighestWeightInputInfo))
 		{
 			break; // 如果找不到权重最高的，直接退出
 		}
+		FSkillTitle HighestSkillTitle=*InputDataMap.Find(HighestWeightInputInfo.InputTag);
+		// 如果执行失败，从缓冲区中移除当前权重最高的输入
+		if (SkillManager->TurnToNextSkillExecutor(ESkillReleaseType::Manual,HighestSkillTitle)) return;
+		InputTagsInBuff.RemoveAll([&](const FAbilityInputInfo& inInputInfo)
+		{
+			return inInputInfo.InputTag == HighestWeightInputInfo.InputTag;
+		});
+		
 	}
 	SetCurrentInputState(EInputState::NormalInputState);
 }

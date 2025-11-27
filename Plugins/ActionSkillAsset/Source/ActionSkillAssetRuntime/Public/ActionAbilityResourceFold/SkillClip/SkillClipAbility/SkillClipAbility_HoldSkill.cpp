@@ -20,7 +20,7 @@ UAnimMontage* USkillClipAbility_HoldSkill::HoldMontagePlayedRule_Implementation(
 void USkillClipAbility_HoldSkill::PreEntryAbility_Implementation()
 {
 	Super::PreEntryAbility_Implementation();
-	HoldTime=Executor->HoldSkill.HoldSkillInfo.CurrentHoldTime;
+	HoldTime=GetCurrentHoldTime();
 	if(PlayMontage= AnimPlayedRules.MontageRule();PlayMontage)
 	{
 		HoldMontagePlayTask=UAbilityTask_PlayMontageAndWait::CreatePlayMontageAndWaitProxy(this,NAME_None,PlayMontage);

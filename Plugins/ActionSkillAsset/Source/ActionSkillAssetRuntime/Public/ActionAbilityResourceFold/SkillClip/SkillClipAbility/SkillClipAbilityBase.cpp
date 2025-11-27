@@ -63,12 +63,12 @@ FEndAbilityEvent& USkillClipAbilityBase::GetAbilitySignal()
 
 float USkillClipAbilityBase::GetHoldMinTime()
 {
-	return Executor->HoldSkill.HoldSkillInfo.MinHoldTime;
+	return Executor->SkillContext.HoldSkill.HoldSkillInfo.MinHoldTime;
 }
 
 float USkillClipAbilityBase::GetCurrentHoldTime()
 {
-	return Executor->HoldSkill.HoldSkillInfo.CurrentHoldTime;
+	return Executor->SkillContext.HoldSkill.HoldSkillInfo.CurrentHoldTime;
 }
 
 const USkillExecutor* USkillClipAbilityBase::GetExecutor()

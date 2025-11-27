@@ -297,7 +297,7 @@ void USkillManager::StartSelectedSkillConfig(USkillExecutorConfig* SelectedConfi
 void USkillManager::SetSelectedSkillConfig(USkillExecutorConfig* InSkillConfig)
 {
 
-	if(SelectedSkillExecutorConfig&&SelectedSkillExecutorConfig->ExecutorDescriptor.Executor->bCanSavetoOffset)
+	if(SelectedSkillExecutorConfig&&SelectedSkillExecutorConfig->ExecutorDescriptor.Executor->CanSavetoOffset())
 	{
 		LastSelectedSkillExecutorConfig=SelectedSkillExecutorConfig;
 	}
