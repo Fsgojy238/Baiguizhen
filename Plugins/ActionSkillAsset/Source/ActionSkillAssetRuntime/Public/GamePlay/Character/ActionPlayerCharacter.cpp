@@ -4,6 +4,7 @@
 #include "ActionPlayerCharacter.h"
 #include "AbilitySystemComponent.h"
 #include "ActionAttackCollisionComponent.h"
+#include "ActionGlobalAttributeSet.h"
 #include "InputActionValue.h"
 #include "AbilitySystemFold/AbilitySystemCompoentRef/ActionAbilitySystemComponent.h"
 #include "AnimInstance/PostAnimPlayedNotify.h"
@@ -24,6 +25,7 @@ AActionPlayerCharacter::AActionPlayerCharacter()
 	AttackCollisionComponent=CreateDefaultSubobject<UActionAttackCollisionComponent>("AttackCollisionComponent");
 	EnemyFollowComponent=CreateDefaultSubobject<UActionEnemyFollowComponent>("ActionEnemyFollowComponent");
 	MotionWarpingComponent=CreateDefaultSubobject<UMotionWarpingComponent>("MotionWarpingComponent");
+	CharacterNormalAttribute=CreateDefaultSubobject<UActionGlobalAttributeSet>("CharacterAttribute");
 }
 
 UAbilitySystemComponent* AActionPlayerCharacter::GetAbilitySystemComponent() const

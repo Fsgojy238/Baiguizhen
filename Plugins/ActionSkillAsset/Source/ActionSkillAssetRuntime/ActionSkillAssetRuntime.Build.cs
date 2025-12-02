@@ -9,7 +9,7 @@ public class ActionSkillAssetRuntime : ModuleRules
         PublicDependencyModuleNames.AddRange(
             new string[]
             {
-                "Core", "CoreUObject", "Engine","AIModule","MotionWarping"
+                "Core", "CoreUObject", "Engine","AIModule","MotionWarping","ActionAttributeSystemRuntime"
             }
         );
 

@@ -31,6 +31,7 @@
     { "Name": "GameplayStateTree", "Enabled": true },
     { "Name": "EnhancedInput", "Enabled": true },
     { "Name": "GameplayAbilities", "Enabled": true },
-    { "Name": "DataValidation", "Enabled": true }
+    { "Name": "DataValidation", "Enabled": true },
+	  {"Name": "ActionAttributeSystem", "Enabled": true }
   ]
 }

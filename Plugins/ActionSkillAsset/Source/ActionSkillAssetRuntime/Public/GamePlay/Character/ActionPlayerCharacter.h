@@ -10,6 +10,7 @@
 #include "Interface/CharacterInfoInterface.h"
 #include "ActionPlayerCharacter.generated.h"
 
+class UActionGlobalAttributeSet;
 class UMotionWarpingComponent;
 class UActionEnemyFollowComponent;
 class UActionAttackCollisionComponent;
@@ -75,4 +76,5 @@ public:
 	UActionEnemyFollowComponent * EnemyFollowComponent;
 	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly)
 	UMotionWarpingComponent *   MotionWarpingComponent;
+	TObjectPtr<UActionGlobalAttributeSet> CharacterNormalAttribute;
 };
