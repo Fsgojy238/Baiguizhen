@@ -29,6 +29,7 @@ void UAttackCollisionComponent::StartTrace(const TArray<FName>& TraceFollowName,
 	if(CollisionCategory==ECollisionType::GlobalCollision) return ;
 	TraceInfo.FindOrAdd(CollisionCategory).SocketNames.Append(TraceFollowName);
 	TraceNum+=TraceFollowName.Num();
+	UpdateSocketLocation();
 }
 
 void UAttackCollisionComponent::StartTrace(const TArray<FName>& TraceFollowName, ECollisionType CollisionCategory,
@@ -45,6 +46,7 @@ void UAttackCollisionComponent::StartTrace(const TArray<FName>& TraceFollowName,
 			MeshInfo.Value.Append(TraceFollowName);
 		}
 	}
+	UpdateSocketLocation();
 }
 
 void UAttackCollisionComponent::EndTrace(ECollisionType CollisionType, const TArray<FName>& TraceFollowName)
